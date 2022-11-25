@@ -13,6 +13,6 @@ sourcefile=${1:-./birthdays}
 sort --field-separator=. --key=2n "$sourcefile" > tmp && mv tmp "$sourcefile"
 
 # extract dates and names
-while read date name; do
+while read -r date name; do
     printf "Date: %s\tName: %s\n" "$date" "$name"
 done < "$sourcefile"
