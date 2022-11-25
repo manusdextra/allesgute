@@ -1,0 +1,21 @@
+#!/bin/sh
+#
+# This script parses the sourcefile and creates / updates a crontab from it.
+# It expects the following format:
+# 01.01. Name
+
+sourcefile=${1:-./birthdays}
+
+# check for input file
+[ -e "$sourcefile" ] || exit 1
+
+# sort by date
+sort --field-separator=. --key=2n "$sourcefile" > tmp && mv tmp "$sourcefile"
+
+# extract dates and names
+while read date name; do
+    printf "Date: %s\tName: %s\n" "$date" "$name"
+done < "$sourcefile"
+
+# check for crontab
+
