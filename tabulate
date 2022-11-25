@@ -16,6 +16,3 @@ sort --field-separator=. --key=2n "$sourcefile" > tmp && mv tmp "$sourcefile"
 while read date name; do
     printf "Date: %s\tName: %s\n" "$date" "$name"
 done < "$sourcefile"
-
-# check for crontab
-
