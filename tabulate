@@ -24,7 +24,7 @@ while read -r line; do
         /*  translate into crontab format:              */
         /*  minute hour day month weekday command       */
 
-        printf("0 0 %.2d %.2d 0 %s\n", $1, $2, $3);
+        printf("0 0 %.2d %.2d * notify-send \"%s\"\n", $1, $2, $3);
 
     }' >> "$crontab"
 done < "$sourcefile"
