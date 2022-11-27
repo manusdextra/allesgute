@@ -11,7 +11,7 @@ crontab=${2:-./crontab}
 [ -e "$sourcefile" ] || exit 1
 
 # sort by date
-sort --field-separator=. --key=2n "$sourcefile" > tmp && mv tmp "$sourcefile"
+sort -t . -k 2 "$sourcefile" > tmp && mv tmp "$sourcefile"
 
 # extract dates and names
 [ -e $crontab ] && rm $crontab && touch $crontab
