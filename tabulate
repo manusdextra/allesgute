@@ -17,12 +17,12 @@ sort -t . -k 2 "$sourcefile" > tmp && mv tmp "$sourcefile"
 [ -e "$crontab" ] && rm "$crontab" && touch "$crontab"
 while read -r; do
     awk -F. '{
-        /*  trim leading whitespace                     */
+        # trim leading whitespace
 
         gsub(/^ */,"",$3);
 
-        /*  translate into crontab format:              */
-        /*  minute hour day month weekday command       */
+        # translate into crontab format:
+        # minute hour day month weekday command
 
         printf("0 0 %.2d %.2d * notify-send \"%s\"\n", $1, $2, $3);
 
