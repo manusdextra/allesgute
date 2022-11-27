@@ -14,8 +14,8 @@ crontab=${2:-./crontab}
 sort -t . -k 2 "$sourcefile" > tmp && mv tmp "$sourcefile"
 
 # extract dates and names
-[ -e $crontab ] && rm $crontab && touch $crontab
-while read -r line; do
+[ -e "$crontab" ] && rm "$crontab" && touch "$crontab"
+while read -r; do
     awk -F. '{
         /*  trim leading whitespace                     */
 
