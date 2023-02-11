@@ -5,3 +5,4 @@ COPY tabulate /app/
 RUN ["chmod", "+x", "/app/tabulate"]
 WORKDIR /app
 RUN ["/app/tabulate"]
+CMD ["/usr/sbin/crond", "-f", "-d", "0"]
