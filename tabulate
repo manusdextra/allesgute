@@ -24,7 +24,10 @@ while read -r; do
         # translate into crontab format:
         # minute hour day month weekday command
 
-        printf("0 0 %.2d %.2d * notify-send \"%s\"\n", $1, $2, $3);
+        printf("0 0 %.2d %.2d * /app/congratulate %s\n", $1, $2, $3);
 
     }' >> "$crontab"
 done < "$sourcefile"
+
+# move new crontab into place
+rm "/etc/crontabs/root" && mv "$crontab" "/etc/crontabs/root"
