@@ -15,7 +15,11 @@ sort -t . -k 2 "$sourcefile" > tmp && mv tmp "$sourcefile"
 
 # extract dates and names
 [ -e "$crontab" ] && rm "$crontab" && touch "$crontab"
-while read -r; do
+
+# testing line
+# printf "* * * * * /app/congratulate test\n" > "$crontab"
+
+while read -r _; do
     awk -F. '{
         # trim leading whitespace
 
@@ -24,10 +28,13 @@ while read -r; do
         # translate into crontab format:
         # minute hour day month weekday command
 
-        printf("0 0 %.2d %.2d * /app/congratulate %s\n", $1, $2, $3);
+        printf("0 0 %.2d %.2d * /app/congratulate %s >/proc/1/fd/1 2>&1\n", $1, $2, $3);
 
     }' >> "$crontab"
 done < "$sourcefile"
 
 # move new crontab into place
-rm "/etc/crontabs/root" && mv "$crontab" "/etc/crontabs/root"
+crontablocation="/var/spool/cron/crontabs/root"
+[ -e "$crontablocation" ] && rm "$crontablocation"
+mkdir -p ${crontablocation%$(basename "$crontablocation")}
+mv "$crontab" "$crontablocation"

@@ -1,6 +1,7 @@
 FROM alpine:3.17
 MAINTAINER github.com/manusdextra
 RUN apk update; apk upgrade
+RUN apk add curl
 
 COPY birthdays /app/
 WORKDIR /app
@@ -18,4 +19,4 @@ RUN ["chmod", "+x", "/app/congratulate"]
 RUN ["rm", "-rf", "/etc/periodic/*"]
 
 # this should theoretically keep the container running
-CMD ["/usr/sbin/crond", "-f", "-d", "8"]
+CMD ["/usr/sbin/crond", "-f", "-d", "0"]
