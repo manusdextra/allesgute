@@ -1,5 +1,5 @@
 build:
-   docker build -t allesgute . 
+    docker build -t allesgute . 
 
 run:
     docker run \
