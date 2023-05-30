@@ -16,9 +16,6 @@ sort -t . -k 2 "$sourcefile" > tmp && mv tmp "$sourcefile"
 # extract dates and names
 [ -e "$crontab" ] && rm "$crontab" && touch "$crontab"
 
-# testing line
-# printf "* * * * * /app/congratulate test\n" > "$crontab"
-
 while read -r _; do
     awk -F. '{
         # trim leading whitespace
@@ -32,6 +29,9 @@ while read -r _; do
 
     }' >> "$crontab"
 done < "$sourcefile"
+
+# testing line
+# printf "* * * * * /app/congratulate test\n" > "$crontab"
 
 # move new crontab into place
 crontablocation="/var/spool/cron/crontabs/root"
