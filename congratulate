@@ -4,7 +4,7 @@ printf "Remember %s!\n" "$@" > mail.tmp
 
 curl --ssl-reqd \
   --url $URL \
-  --user $USER \
+  --user $MAIL_FROM:$MAIL_PASSWORD \
   --mail-from $MAIL_FROM \
   --mail-rcpt $MAIL_TO \
   --upload-file mail.tmp
